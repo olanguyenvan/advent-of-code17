@@ -11,8 +11,7 @@ def find_steps_count_from(n):
     if diff == 0:
         return innser_square_length - 1
 
-    number_of_sides_to_pass = (diff / (innser_square_length + 1)) // 1
-    steps_in_side_to_pass = diff - number_of_sides_to_pass * (innser_square_length + 1)
+    steps_in_side_to_pass = diff % (innser_square_length + 1)
     return innser_square_length // 2 + 1 + math.fabs(innser_square_length // 2 + 1 - steps_in_side_to_pass)
 
 if __name__ == '__main__':
