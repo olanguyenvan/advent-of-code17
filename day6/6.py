@@ -6,6 +6,7 @@ def count_steps_until_redistribution_loop(memory_banks_int):
         str_bank_states = list(map(lambda i: str(i), bank_states))
         concatenated_bank_state = ';'.join(str_bank_states)
         if concatenated_bank_state in cached_states:
+            print('seen again after %s steps' % (len(cached_states) - cached_states.index(concatenated_bank_state)))
             return True
         cached_states.append(concatenated_bank_state)
 
@@ -31,5 +32,4 @@ if __name__ == '__main__':
     with open('input.txt') as fd:
         memory_banks_str = fd.read().replace('\n', '').split('\t')
     memory_banks_int = list(map(lambda s: int(s), memory_banks_str))
-    print(count_steps_until_redistribution_loop([0, 2, 7, 0]))
     print(count_steps_until_redistribution_loop(memory_banks_int))

@@ -1,19 +1,21 @@
 
-def count_repetitions(n):
-    n_str = str(n)
+def count_repetitions(n_str, get_index_to_compare):
     s = 0
     size_of_n = len(n_str)
-    for i in range(size_of_n - 1):
-        s += int(n_str[i] == n_str[i + 1]) * int(n_str[i])
-
-    s += int(n_str[-1] == n_str[0]) * int(n_str[0])
+    for i in range(size_of_n):
+        s += int(n_str[i] == n_str[get_index_to_compare(i)]) * int(n_str[i])
 
     return s
 
+
+def get_index_after_half_length(size_of_n):
+    return lambda index: index - size_of_n // 2
+
+
 if __name__ == '__main__':
-    print(count_repetitions(1122))
-    print(count_repetitions(1111))
-    print(count_repetitions(1234))
-    print(count_repetitions(91212129))
-    print(count_repetitions(0))
+    with open('input.txt') as fd:
+        n = fd.readline().replace('\n', '')
+
+    print(count_repetitions(n, lambda index: index - 1))
+    print(count_repetitions(n, get_index_after_half_length(len(n))))
 
